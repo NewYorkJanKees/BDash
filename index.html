@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Crypto Bullish Dashboard</title>
+    <title>Crypto Top 50 Dashboard</title>
     <style>
         body { background: #131722; color: #d1d4dc; font-family: sans-serif; padding: 20px; }
         .control-panel { background: #1c2230; padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; }
@@ -16,7 +16,7 @@
 <body>
 
 <div class="control-panel">
-    <h1>Crypto Bullish Dashboard</h1>
+    <h1>Crypto Top 50 Dashboard</h1>
     <select id="coinSelect" onchange="updateDashboard()"></select>
 </div>
 
@@ -31,12 +31,55 @@
 <script>
     const coins = [
         {name: "Bitcoin (BTC)", sym: "COINBASE:BTCEUR", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟢 Bullish"},
-        {name: "Solana (SOL) 🟢", sym: "BINANCE:SOLUSDT", st: "🟢 Bullish", mt: "🟢 Bullish", lt: "🟢 Bullish"},
-        {name: "Tron (TRX) 🟢", sym: "BINANCE:TRXUSDT", st: "🟢 Bullish", mt: "🟢 Bullish", lt: "🟢 Bullish"},
-        {name: "Render (RNDR) 🟢", sym: "BINANCE:RNDRUSDT", st: "🟢 Bullish", mt: "🟢 Bullish", lt: "🟢 Bullish"},
-        {name: "Bitget (BGB) 🟢", sym: "MEXC:BGBUSDT", st: "🟢 Bullish", mt: "🟢 Bullish", lt: "🟢 Bullish"},
         {name: "Ethereum (ETH)", sym: "COINBASE:ETHEUR", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟢 Bullish"},
-        // Voeg hier de rest van je 50 munten toe op dezelfde manier
+        {name: "Bitcoin Cash (BCH)", sym: "KRAKEN:BCHEUR", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟡 Neutraal"},
+        {name: "Solana (SOL) 🟢", sym: "BINANCE:SOLUSDT", st: "🟢 Bullish", mt: "🟢 Bullish", lt: "🟢 Bullish"},
+        {name: "Ripple (XRP)", sym: "BINANCE:XRPUSDT", st: "🟡 Afwachten", mt: "🟡 Afwachten", lt: "🟢 Bullish"},
+        {name: "Cardano (ADA)", sym: "BINANCE:ADAUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "Dogecoin (DOGE)", sym: "BINANCE:DOGEUSDT", st: "🟡 Afwachten", mt: "🟡 Afwachten", lt: "🟡 Afwachten"},
+        {name: "Avalanche (AVAX)", sym: "BINANCE:AVAXUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟢 Bullish"},
+        {name: "Polkadot (DOT)", sym: "BINANCE:DOTUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "Tron (TRX) 🟢", sym: "BINANCE:TRXUSDT", st: "🟢 Bullish", mt: "🟢 Bullish", lt: "🟢 Bullish"},
+        {name: "Chainlink (LINK)", sym: "BINANCE:LINKUSDT", st: "🟡 Afwachten", mt: "🟡 Afwachten", lt: "🟢 Bullish"},
+        {name: "Polygon (MATIC)", sym: "BINANCE:MATICUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "Litecoin (LTC)", sym: "COINBASE:LTCEUR", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟡 Neutraal"},
+        {name: "Shiba Inu (SHIB)", sym: "BINANCE:SHIBUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "Dai (DAI)", sym: "BINANCE:DAIUSDT", st: "🟡 Neutraal", mt: "🟡 Neutraal", lt: "🟡 Neutraal"},
+        {name: "Uniswap (UNI)", sym: "BINANCE:UNIUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟡 Afwachten"},
+        {name: "Cosmos (ATOM)", sym: "BINANCE:ATOMUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "Filecoin (FIL)", sym: "BINANCE:FILUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🔴 Bearish"},
+        {name: "Near Protocol (NEAR) 🟢", sym: "BINANCE:NEARUSDT", st: "🟢 Bullish", mt: "🟢 Bullish", lt: "🟢 Bullish"},
+        {name: "Aptos (APT)", sym: "BINANCE:APTUSDT", st: "🟡 Afwachten", mt: "🟡 Afwachten", lt: "🟢 Bullish"},
+        {name: "Ethereum Classic (ETC)", sym: "BINANCE:ETCUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟡 Neutraal"},
+        {name: "Stellar (XLM)", sym: "BINANCE:XLMUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟡 Afwachten"},
+        {name: "Optimism (OP)", sym: "BINANCE:OPUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟢 Bullish"},
+        {name: "Arbitrum (ARB)", sym: "BINANCE:ARBUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟢 Bullish"},
+        {name: "Render (RNDR) 🟢", sym: "BINANCE:RNDRUSDT", st: "🟢 Bullish", mt: "🟢 Bullish", lt: "🟢 Bullish"},
+        {name: "Pepe (PEPE)", sym: "BINANCE:PEPEUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟡 Afwachten"},
+        {name: "Hedera (HBAR)", sym: "BINANCE:HBARUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟡 Afwachten"},
+        {name: "Internet Computer (ICP)", sym: "BINANCE:ICPUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟡 Afwachten"},
+        {name: "Theta Network (THETA)", sym: "BINANCE:THETAUSDT", st: "🟡 Afwachten", mt: "🟡 Afwachten", lt: "🟡 Afwachten"},
+        {name: "VeChain (VET)", sym: "BINANCE:VETUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "Monero (XMR)", sym: "KRAKEN:XMREUR", st: "🟡 Afwachten", mt: "🟡 Afwachten", lt: "🟡 Neutraal"},
+        {name: "Algorand (ALGO)", sym: "BINANCE:ALGOUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🔴 Bearish"},
+        {name: "The Graph (GRT)", sym: "BINANCE:GRTUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟡 Afwachten"},
+        {name: "Fantom (FTM)", sym: "BINANCE:FTMUSDT", st: "🔴 Bearish", mt: "🟡 Afwachten", lt: "🟢 Bullish"},
+        {name: "Sandbox (SAND)", sym: "BINANCE:SANDUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "Decentraland (MANA)", sym: "BINANCE:MANAUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "Aave (AAVE)", sym: "BINANCE:AAVEUSDT", st: "🟡 Afwachten", mt: "🟡 Afwachten", lt: "🟢 Bullish"},
+        {name: "Maker (MKR)", sym: "BINANCE:MKRUSDT", st: "🟡 Afwachten", mt: "🟢 Bullish", lt: "🟢 Bullish"},
+        {name: "Bitget (BGB) 🟢", sym: "MEXC:BGBUSDT", st: "🟢 Bullish", mt: "🟢 Bullish", lt: "🟢 Bullish"},
+        {name: "Tezos (XTZ)", sym: "BINANCE:XTZUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "EOS (EOS)", sym: "BINANCE:EOSUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🔴 Bearish"},
+        {name: "Neo (NEO)", sym: "BINANCE:NEOUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "Klaytn (KLAY)", sym: "BINANCE:KLAYUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🔴 Bearish"},
+        {name: "Flow (FLOW)", sym: "BINANCE:FLOWUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🔴 Bearish"},
+        {name: "Quant (QNT)", sym: "BINANCE:QNTUSDT", st: "🟡 Afwachten", mt: "🟡 Afwachten", lt: "🟡 Afwachten"},
+        {name: "Dash (DASH)", sym: "BINANCE:DASHUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🔴 Bearish"},
+        {name: "Zcash (ZEC)", sym: "BINANCE:ZECUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🔴 Bearish"},
+        {name: "Axie Infinity (AXS)", sym: "BINANCE:AXSUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "IOTA (MIOTA)", sym: "BINANCE:IOTAUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"},
+        {name: "Chiliz (CHZ)", sym: "BINANCE:CHZUSDT", st: "🔴 Bearish", mt: "🔴 Bearish", lt: "🟡 Afwachten"}
     ];
 
     const configs = [
@@ -45,7 +88,7 @@
         {name: 'MACD (Omslag)', study: 'MACD@tv-basicstudies', desc: 'Kruisingen van de lijnen duiden op trendomslagen.'},
         {name: 'Volume (Bevestiging)', study: 'Volume@tv-basicstudies', desc: 'Hoge volumes bij prijsactie bevestigen de richting.'},
         {name: 'VWAP (Fair Price)', study: 'VWAP@tv-basicstudies', desc: 'Prijs t.o.v. VWAP geeft intraday fair price aan.'},
-        {name: 'Sentiment', study: null, desc: 'Algemene marktstabiliteit.'}
+        {name: 'Sentiment', study: null, desc: 'Algemene marktstabiliteit op basis van futures.'}
     ];
 
     const select = document.getElementById('coinSelect');
